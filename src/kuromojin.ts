@@ -52,7 +52,7 @@ const getNodeModuleDirPath = () => {
     }
     // Browser
     // if window.kuromojin.dicPath is defined, use it as default dict path.
-    const maybeKuromojiWindow: KuromojiWindow | undefined = typeof window != "undefined" ? window : undefined;
+    const maybeKuromojiWindow: KuromojiWindow | undefined = typeof window != "undefined" ? window : typeof self != "undefined" ? self : undefined;
     if (
         typeof maybeKuromojiWindow !== "undefined" &&
         typeof maybeKuromojiWindow.kuromojin === "object" &&
@@ -73,7 +73,7 @@ export type getTokenizerOption = {
     dicPath: string;
 };
 
-export function getTokenizer(options: getTokenizerOption = {dicPath: getNodeModuleDirPath()}): Promise<Tokenizer> {
+export function getTokenizer(options: getTokenizerOption = { dicPath: getNodeModuleDirPath() }): Promise<Tokenizer> {
     if (_tokenizer) {
         return Promise.resolve(_tokenizer);
     }

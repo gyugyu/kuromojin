@@ -1,4 +1,4 @@
-# kuromojin [![Build Status](https://travis-ci.org/azu/kuromojin.svg?branch=master)](https://travis-ci.org/azu/kuromojin)
+# kuromojin [![Actions Status: test](https://github.com/azu/kuromojin/workflows/test/badge.svg)](https://github.com/azu/kuromojin/actions?query=workflow%3A"test")
 
 Provide a high level wrapper for [kuromoji.js](https://github.com/takuyaa/kuromoji.js "kuromoji.js").
 
@@ -6,6 +6,8 @@ Provide a high level wrapper for [kuromoji.js](https://github.com/takuyaa/kuromo
 
 - Promise based API
 - Cache Layer
+    - Fetch the dictionary at once
+    - Return same tokens for same text
 
 ## Installation
 
@@ -52,16 +54,23 @@ tokenize(text).then(results => {
 If `window.kuromojin.dicPath` is defined, kuromojin use it as default dict path.
 
 ```js
-import {tokenize} from "kuromojin";
+import {getTokenizer} from "kuromojin";
 // Affect all module that are used kuromojin.
 window.kuromojin = {
-    dicPath: "https://example.com/kuromoji/dict"
+    dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict"
 };
-// this `getTokenizer` function use "https://example.com/kuromoji/dict" 
+// this `getTokenizer` function use "https://kuromojin.netlify.com/dict" 
 getTokenizer();
 // === 
-getTokenizer({dicPath: "https://example.com/kuromoji/dict"})
+getTokenizer({dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict"})
 ```
+
+:memo: Test dictionary URL
+
+- "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict"
+    - cdn dict for kuromoji.js
+- https://kuromojin.netlify.com/dict/*.dat.gz
+    - example: https://kuromojin.netlify.com/dict/base.dat.gz
 
 ### Note: backward compatibility for <= 1.1.0
 

@@ -1,5 +1,5 @@
 {
-  "name": "kuromojin",
+  "name": "@gyugyu/kuromojin",
   "version": "2.1.1",
   "description": "Provide a high level wrapper for kuromoji.js",
   "keywords": [
